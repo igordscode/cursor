@@ -1,82 +1,61 @@
-# Estrutura do MVP – Página 1: Dashboard (Com Header, Welcome Banner e Diretrizes Responsivas)
+# Estrutura do MVP – Página 1: Panel de Control (Dashboard) v3.1
 
-**Missão da Tela:** Ser o "cockpit" do gestor da clínica, com uma interface que transmite autoridade, clareza e elegância em qualquer dispositivo.
-
----
-
-### **Layout Geral da Página e Comportamento Responsivo**
-
-A tela é composta por 3 partes principais:
-1.  **Sidebar de Navegação (Fixa à Esquerda)**
-2.  **Header Global da Aplicação (Barra Superior Fixa)**
-3.  **Área de Conteúdo Principal (Rolável)**
-
-#### **Diretrizes de Responsividade (Comportamento em Diferentes Telas):**
-
--   **Desktop (telas grandes, > 1024px):**
-    -   A **Sidebar** é exibida em sua largura total, com ícones e texto.
-    -   A **Área de Conteúdo** adota um layout complexo em grid. O **Bloco de KPIs** se organiza em uma linha de 4 colunas. A **Seção de Conteúdo Principal** se divide em um grid de 2 colunas (mais larga à esquerda, mais estreita à direita).
-
--   **Tablet (telas médias, 768px a 1024px):**
-    -   A **Sidebar** pode ser recolhida para exibir apenas os ícones, expandindo a área de conteúdo.
-    -   O **Bloco de KPIs** se reorganiza em um grid de 2x2 (duas colunas, duas linhas).
-    -   O layout da **Seção de Conteúdo Principal** mantém as 2 colunas, mas com proporções mais equilibradas.
-
--   **Mobile (telas pequenas, < 768px):**
-    -   A **Sidebar** fica completamente oculta, acessível por um ícone de "menu hambúrguer" no Header.
-    -   A **Área de Conteúdo Principal** se transforma em uma **coluna única vertical**. Todos os componentes são empilhados na seguinte ordem: Welcome Banner → Bloco de KPIs (em 2x2 ou 1x4) → Todos os cards da coluna esquerda → Todos os cards da coluna direita.
+**Misión de la Pantalla:** Ser el cockpit definitivo de la clínica, combinando KPIs estratégicos y gráficos de performance con la estética premium y moderna de las referencias visuales de TweakCN, totalmente localizado para el español.
 
 ---
 
-### **1. Componentes Estruturais (Header e Welcome Banner)**
+### **Layout General y Comportamiento Responsivo**
 
-#### **1.1. Header Global da Aplicação (Barra Superior)**
-*Barra fina e persistente em todas as páginas, contendo controles globais.*
+La página será dividida en secciones secuenciales, apiladas verticalmente en mobile y organizadas en un grid más complejo en desktop.
 
--   **Design:** Fundo definido pela variável `--background`, com uma borda sutil na parte inferior (`border-b border-border`).
--   **Conteúdo (Esquerda):**
-    -   Logo da Aplicação: Ícone + "ClinicAI". (Em mobile, pode ser substituído por um ícone de menu).
--   **Conteúdo (Direita):**
-    -   Barra de Busca Global: Campo de busca elegante.
-    -   Ícone de Notificações (🔔).
-    -   Dropdown de Perfil com Avatar do usuário.
-
-#### **1.2. Welcome Banner do Dashboard (Hero da Página)**
-*Bloco visualmente destacado, posicionado como o PRIMEIRO elemento dentro da Área de Conteúdo Principal.*
-
--   **Design:** Card largo com fundo de cor de destaque sutil (ex: `bg-secondary`) e padding generoso.
--   **Conteúdo (Esquerda):**
-    -   `H1 (Título Principal)`: **"Hello, Mohammad 👋"** (ou "Good evening, Igor").
-    -   `p (Subtítulo)`: "Aqui está o resumo da sua clínica hoje."
--   **Conteúdo (Direita):**
-    -   Dropdown de Período: Seletor com o valor padrão "July 2024".
+1.  **Header Global de la Aplicación** (Fijo en el tope)
+2.  **Sección "Visión General"** (8 KPIs Principales)
+3.  **Sección "Volumen Total"** (Gráfico Principal)
+4.  **Sección de Contenido Inferior (Grid de 2 Columnas):**
+    -   Columna Izquierda: Tabla de `Pacientes Recientes`.
+    -   Columna Derecha: Módulos de `Pacientes Activos`, `Consultas por Especialidad` y `Turnos de Consulta`.
 
 ---
 
-### **2. Componentes de Conteúdo do Dashboard (Abaixo do Welcome Banner)**
+### **Componentes Detallados**
 
-#### **2.1. Bloco de KPIs (Cards)**
--   **Estrutura:** Grid com 4 cards.
-    -   **Responsividade:** `grid-cols-1 sm:grid-cols-2 lg:grid-cols-4`.
--   **Design de cada Card:** Fundo sólido com cor vibrante, ícone, título e valores.
--   **Cards:**
-    1.  `Hospital Earnings` (Azul): **$ 800K - 500K**
-    2.  `Total Patient` (Amarelo): **600**
-    3.  `Operation` (Vermelho): **400**
-    4.  `Appointments` (Verde): **80**
+#### **1. Sección "Visión General" (KPIs)**
+-   **Estructura:** Un grid responsivo (2x4 en desktop/tablet, 2x2 o 1x4 en mobile) con **8 cards de KPI**.
+-   **Directriz Visual Clave:** Seguir el estilo de los cards de KPI de la referencia `tweakcn-dashboard.png`. Cada card debe tener fondo blanco/gris claro, borde sutil, ícono, título, valor principal y un indicador de variación.
+-   **Títulos de los KPIs:**
+    1.  `Facturación (Mes)`
+    2.  `Ganancia Estimada (Mes)`
+    3.  `Costo por Paciente (CAC)`
+    4.  `Valor del Paciente (LTV)`
+    5.  `Citas (Hoy)`
+    6.  `Nuevos Pacientes (Mes)`
+    7.  `Tasa de Ocupación (Hoy)`
+    8.  `Satisfacción (NPS)`
 
-#### **2.2. Seção de Conteúdo Principal (Grid de 2 Colunas em Desktop/Tablet)**
--   **Estrutura Geral:**
-    -   **Responsividade:** `grid grid-cols-1 lg:grid-cols-3 gap-6`. A coluna da esquerda ocupará 2/3 do espaço (`lg:col-span-2`) e a da direita 1/3 (`lg:col-span-1`). Em mobile, serão empilhadas.
+#### **2. Sección "Volumen Total" (Gráfico Principal)**
+-   **Estructura:** Un card grande que ocupa el ancho total de la página.
+-   **Directriz Visual Clave:** Seguir el diseño del card "Total Visitors" de la referencia `tweakcn-dashboard.png`.
+-   **Contenido:**
+    -   **Header del Card:** Título "Volumen Total" y filtros de período (`Últimos 3 meses`, `Últimos 30 días`).
+    -   **Cuerpo del Card:** Un gráfico de línea/área con un gradiente suave.
 
--   **Coluna Esquerda (`lg:col-span-2`):**
-    -   **Card `Best Doctor's`:** Header com título e link "View all". Conteúdo com uma lista horizontal de avatares de médicos.
-    -   **Card `Patients`:** Header com título e link "View all". Conteúdo com um gráfico de rosca (Donut Chart) e o número total de pacientes.
+#### **3. Sección Inferior (Grid de 2 Columnas)**
 
--   **Coluna Direita (`lg:col-span-1`):**
-    -   **Card `Visitors`:** Gráfico de linha/área.
-    -   **Card `Recovered`:** Gráfico de linha.
-    -   **Card `Consultation Slots`:** Header com título e link "View all". Conteúdo com uma lista vertical de slots de consulta.
+-   **3.1 Columna Izquierda:**
+    -   **Card `Pacientes Recientes`**:
+        -   **Directriz Visual Clave:** Inspirado en la tabla "Payments" de la referencia `tweakcn-cards.png`.
+        -   **Contenido:** Una tabla minimalista con las columnas: `Nombre`, `Contacto`, `Status` (con badge colorido), `Última Consulta`, `Acciones`.
+
+-   **3.2 Coluna Dereita:**
+    -   **Card `Pacientes Activos`**:
+        -   **Directriz Visual Clave:** Inspirado en el "Pie Chart" de la referencia `tweakcn-dashboard.png`.
+        -   **Contenido:** Un gráfico de rosca (Donut Chart) mostrando el porcentaje de pacientes ativos.
+    -   **Card `Consultas por Especialidad`**:
+        -   **Directriz Visual Clave:** Inspirado en el "Bar Chart" de la referencia `tweakcn-dashboard.png`.
+        -   **Contenido:** Un gráfico de barras horizontales mostrando los procedimientos más realizados.
+    -   **Card `Turnos de Consulta`**:
+        -   **Directriz Visual Clave:** Inspirado en el card "Consultation Slots" de la referencia `Hospital Management System`, pero con la estética TweakCN.
+        -   **Contenido:** Una lista de agendamentos del día con `Horario`, `Paciente` y un punto de status colorido.
 
 ### **2. Página: Agenda (Calendário)**
 
